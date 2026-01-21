@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fidel Bingo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div id="welcome-screen" class="welcome-screen active">
+            <div class="welcome-box">
+                <div class="welcome-logo">FIDEL BINGO</div>
+                <div class="welcome-subtitle">እንኳን ደህና መጡ</div>
+                <div class="welcome-actions">
+                    <a href="https://t.me/your_bot_username" target="_blank" class="welcome-btn telegram-btn">ቦቱን ተቀላቀል (Join Bot)</a>
+                    <button class="welcome-btn" onclick="showAuth('signup')">ጆይንድ (Joined)</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="auth-screen" class="auth-screen" style="display: none;">
+            <div class="auth-box">
+                <h1 class="auth-logo">FIDEL BINGO</h1>
+                <div id="login-form">
+                    <h2>Login</h2>
+                    <input type="text" id="login-telegram" placeholder="Telegram Chat ID">
+                    <input type="password" id="login-pass" placeholder="Password">
+                    <button id="do-login" class="auth-btn">Login</button>
+                    <p>No account? <a href="#" onclick="showSignup()">Sign up</a></p>
+                </div>
+                <div id="signup-form" style="display: none;">
+                    <h2>Sign Up</h2>
+                    <p style="font-size: 0.8rem; color: #aaa; margin-bottom: 10px;">ቦቱን ተጠቅመው Chat ID ማግኘት ይችላሉ</p>
+                    <input type="text" id="signup-telegram" placeholder="Telegram Chat ID">
+                    <input type="text" id="signup-username" placeholder="Username">
+                    <div id="otp-section" style="display: none;">
+                        <input type="text" id="signup-otp" placeholder="Enter OTP from Telegram">
+                        <input type="password" id="signup-pass" placeholder="Create Password">
+                        <button id="do-verify" class="auth-btn">Verify & Register</button>
+                    </div>
+                    <button id="do-signup-request" class="auth-btn">Get OTP Code</button>
+                    <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="main-content">
+            <div id="stake-screen" class="stake-screen active" style="display: block;">
+                <div class="selection-header">
+                    <div class="selection-title">የመጫወቻ ክፍል ይምረጡ</div>
+                    <div class="user-profile"><span id="stake-username">---</span></div>
+                </div>
+                <div class="stake-list" id="stake-rooms-list">
+                    </div>
+            </div>
+
+            <div id="game-screen" class="game-screen" style="display: none; background: #0c111d; height: 100vh; width: 100vw; position: fixed; top: 0; left: 0; z-index: 999999; flex-direction: column; overflow-y: auto; visibility: visible; opacity: 1;">
+                <div class="game-header-stats" style="display: flex; justify-content: space-between; padding: 10px; gap: 10px; background: #1e2533; border-bottom: 1px solid #374151;">
+                    <div class="stat-box-dark" style="flex: 1; padding: 10px; background: #111827; border-radius: 8px; text-align: center; font-weight: bold; border: 1px solid #374151; color: white;">BET: <span id="bet-amount">0</span> ETB</div>
+                    <div class="stat-box-dark" style="flex: 1; padding: 10px; background: #111827; border-radius: 8px; text-align: center; font-weight: bold; border: 1px solid #374151; color: white;">PLAYERS: <span id="players">0</span></div>
+                </div>
+                
+                <div id="selection-instruction" style="text-align: center; padding: 15px 10px 5px; color: #3b82f6; font-weight: bold; font-size: 1.1rem; display: block; visibility: visible;">ካርድ ይምረጡ (Select Card)</div>
+                <div id="master-grid" class="master-grid" style="padding: 10px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; width: 100%; box-sizing: border-box; min-height: 200px; visibility: visible !important; opacity: 1 !important;"></div>
+                
+                <div class="game-info-section" style="padding: 15px; border-top: 1px solid #374151; margin-top: auto; background: #111827; display: flex; flex-direction: column; align-items: center; visibility: visible;">
+                    <div class="active-ball-display" style="width: 70px; height: 70px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.8rem; font-weight: 900; color: white; box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); border: 4px solid #fff; visibility: visible;"><span id="active-ball">--</span></div>
+                    <div id="bingo-board" class="player-card-grid" style="width: 100%; max-width: 400px; margin: 0 auto; visibility: visible;"></div>
+                    <button id="bingo-btn" class="bingo-btn" style="width: 100%; max-width: 400px; margin-top: 15px; padding: 15px; background: #22c55e; color: white; border: none; border-radius: 12px; font-weight: 900; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3); visibility: visible;">BINGO!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
